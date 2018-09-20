@@ -7,7 +7,7 @@ from pyrogram.api.errors import FloodWait
 
 
 """ Config """
-target = "https://t.me/joinchat/Awg5A0UW-tzOLX7zMoTDog"  # tips for this: chat_id param in https://docs.pyrogram.ml/pyrogram/Client#pyrogram.Client.get_history
+target = "https://t.me/joinchat/abcdefghijklm"  # tips for this: chat_id param in https://docs.pyrogram.ml/pyrogram/Client#pyrogram.Client.get_history
 your_username = "theel0ja"
 
 
