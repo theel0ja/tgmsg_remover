@@ -17,9 +17,11 @@ offset_id = 0  # ID of the last message of the chunk
 
 app.start()
 
+chat_id = app.get_chat(target).id
+
 while True:
     try:
-        m = app.get_history(target, offset_id=offset_id)
+        m = app.get_history(chat_id, offset_id=offset_id)
     except FloodWait as e:
         # For very large chats the method call can raise a FloodWait
         print("waiting {}".format(e.x))
@@ -34,7 +36,7 @@ while True:
 
     for message in messages:
         if message.from_user.username == your_username:
-            app.delete_messages(target, [message.message_id])
+            app.delete_messages(message.chat.id, [message.message_id])
 
 app.stop()
 
