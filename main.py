@@ -35,7 +35,15 @@ while True:
     offset_id = m.messages[-1].message_id
 
     for message in messages:
+        if(type(message.from_user.username) is str):
+            username = message.from_user.username
+            username = " from " + username
+        else:
+            username = ""
+
+        print("Read message" + username)
         if message.from_user.username == your_username:
+            print("Deleting message")
             app.delete_messages(message.chat.id, [message.message_id])
 
 app.stop()

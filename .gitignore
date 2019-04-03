@@ -112,3 +112,5 @@ dmypy.json
 # custom stuff
 config.ini
 my_account.session
+unknown_errors.txt
+.vscode/
