@@ -61,7 +61,7 @@ for target in targets:
 
                 #app.delete_messages(message.chat.id, [message.message_id])
             else:
-            print("Read message" + username)
+                print("Read message" + username)
 
     app.stop()
 
