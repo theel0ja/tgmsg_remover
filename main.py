@@ -55,6 +55,7 @@ for target in targets:
             if message.from_user.username == your_username:
                 if(delete_before > message.date):
                     print("Deleting message from " + your_username + " (sent " + str(message.date) + ")")
+                    app.delete_messages(message.chat.id, [message.message_id])
                 else:
                     print("Read message from " + your_username + " (too new)")
 
