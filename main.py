@@ -14,6 +14,11 @@ targets = [
 
 your_username = "username"
 
+delete_before_time = 3 * 24
+# int() is to delete decimals
+delete_before = int(time.time() - (12 * 60 * 60))
+
+#print(delete_before)
 
 for target in targets:
 
@@ -47,10 +52,15 @@ for target in targets:
             else:
                 username = ""
 
-            print("Read message" + username)
             if message.from_user.username == your_username:
-                print("Deleting message")
-                app.delete_messages(message.chat.id, [message.message_id])
+                if(delete_before > message.date):
+                    print("Deleting message from " + your_username + " (sent " + str(message.date) + ")")
+                else:
+                    print("Read message from " + your_username + " (too new)")
+
+                #app.delete_messages(message.chat.id, [message.message_id])
+            else:
+            print("Read message" + username)
 
     app.stop()
 
