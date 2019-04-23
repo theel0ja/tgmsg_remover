@@ -7,46 +7,52 @@ from pyrogram.api.errors import FloodWait
 
 
 """ Config """
-target = "https://t.me/joinchat/abcdefghijklm"  # tips for this: chat_id param in https://docs.pyrogram.ml/pyrogram/Client#pyrogram.Client.get_history
-your_username = "theel0ja"
+targets = [
+    "https://t.me/joinchat/abcdefg"
+]  # tips for this: chat_id param in https://docs.pyrogram.ml/pyrogram/Client#pyrogram.Client.get_history
 
 
-app = Client("my_account")
-messages = []  # List that will contain all the messages of the target chat
-offset_id = 0  # ID of the last message of the chunk
+your_username = "username"
 
-app.start()
 
-chat_id = app.get_chat(target).id
+for target in targets:
 
-while True:
-    try:
-        m = app.get_history(chat_id, offset_id=offset_id)
-    except FloodWait as e:
-        # For very large chats the method call can raise a FloodWait
-        print("waiting {}".format(e.x))
-        time.sleep(e.x)  # Sleep X seconds before continuing
-        continue
+    app = Client("my_account")
+    messages = []  # List that will contain all the messages of the target chat
+    offset_id = 0  # ID of the last message of the chunk
 
-    if not m.messages:
-        break
+    app.start()
 
-    messages += m.messages
-    offset_id = m.messages[-1].message_id
+    chat_id = app.get_chat(target).id
 
-    for message in messages:
-        if(type(message.from_user.username) is str):
-            username = message.from_user.username
-            username = " from " + username
-        else:
-            username = ""
+    while True:
+        try:
+            m = app.get_history(chat_id, offset_id=offset_id)
+        except FloodWait as e:
+            # For very large chats the method call can raise a FloodWait
+            print("waiting {}".format(e.x))
+            time.sleep(e.x)  # Sleep X seconds before continuing
+            continue
 
-        print("Read message" + username)
-        if message.from_user.username == your_username:
-            print("Deleting message")
-            app.delete_messages(message.chat.id, [message.message_id])
+        if not m.messages:
+            break
 
-app.stop()
+        messages += m.messages
+        offset_id = m.messages[-1].message_id
 
-# Now the "messages" list contains all the messages sorted by date in
-# descending order (from the most recent to the oldest one)
+        for message in messages:
+            if(type(message.from_user.username) is str):
+                username = message.from_user.username
+                username = " from " + username
+            else:
+                username = ""
+
+            print("Read message" + username)
+            if message.from_user.username == your_username:
+                print("Deleting message")
+                app.delete_messages(message.chat.id, [message.message_id])
+
+    app.stop()
+
+    # Now the "messages" list contains all the messages sorted by date in
+    # descending order (from the most recent to the oldest one)
