@@ -16,7 +16,7 @@ your_username = "username"
 
 delete_before_time = 3 * 24
 # int() is to delete decimals
-delete_before = int(time.time() - (12 * 60 * 60))
+delete_before = int(time.time() - (delete_before_time * 60 * 60))
 
 #print(delete_before)
 
